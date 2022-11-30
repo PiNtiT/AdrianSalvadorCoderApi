@@ -9,7 +9,7 @@ namespace AdrianSalvadorCoderApi.Controllers
     [ApiController]
     [Route("[controller]")]
     public class ProductosController : Controller
-    {
+       {
         private ProductosController Controller  = new ProductosController();
         // GET: ProductosController
         [HttpGet]
@@ -17,8 +17,8 @@ namespace AdrianSalvadorCoderApi.Controllers
         {
             try
             {
-                
-                    return Ok("Mensaje");
+                List<Producto> lista = GetProductos();
+                return Ok(lista);
                 
             }
             catch (Exception ex)
@@ -27,6 +27,11 @@ namespace AdrianSalvadorCoderApi.Controllers
                 return Problem(ex.Message);
             }
 
+        }
+
+        private List<Producto> GetProductos()
+        {
+            throw new NotImplementedException();
         }
 
       
