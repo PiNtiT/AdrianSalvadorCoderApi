@@ -11,14 +11,14 @@ namespace AdrianSalvadorCoderApi.Controllers
     [Route("[controller]")]
     public class UsuarioController : Controller
     {
-        private UsuarioController Controller = new UsuarioController();
+        private UsuarioRepositorio repositorio = new UsuarioRepositorio();
 
         [HttpGet]
         public ActionResult<List<Usuario>> Get()
         {
             try
             {
-                List<Usuario> lista = GetUsuario();
+                List<Usuario> lista = repositorio.GetUsuario();
                 return Ok(lista);
             }
             catch (Exception ex)
