@@ -12,14 +12,14 @@ namespace AdrianSalvadorCoderApi.Controllers
     [Route("[controller]")]
     public class VentaController : Controller
     {
-        private VentaController Controller = new VentaController();
+         private VentaRepositorio repositorio = new VentaRepositorio();
 
         [HttpGet]
         public ActionResult<List<Venta>> Get()
         {
             try
             {
-                List<Venta> lista = GetVenta();
+                List<Venta> lista = repositorio.GetVenta();
                 return Ok(lista);
             }
             catch (Exception ex)
