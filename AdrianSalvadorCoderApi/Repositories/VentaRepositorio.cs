@@ -62,5 +62,33 @@ namespace AdrianSalvadorCoderApi.Repositories
             }
             return listaVentas;
         }
+        
+        
+        
+        public void agregarVenta(Venta venta)  //  Agregar nueva venta
+        {
+
+            if (conexion == null)
+            {
+                throw new Exception("Conexion no establecida");
+            }
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Venta(Comentarios, IdUsuario) VALUES(@comentario, @idUsuario)", conexion)) //comando agregar sql
+                {
+                    conexion.Open(); 
+                    cmd.Parameters.Add(new SqlParameter("comentario", SqlDbType.VarChar) { Value = venta.Comentarios });
+                    cmd.Parameters.Add(new SqlParameter("idUsuario", SqlDbType.BigInt) { Value = venta.IdUsuario });
+                    cmd.ExecuteNonQuery();
+
+                    conexion.Close(); 
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
     }
 }
