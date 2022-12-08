@@ -33,5 +33,20 @@ namespace AdrianSalvadorCoderApi.Controllers
         {
             throw new NotImplementedException();
         }
+        
+        
+         [HttpPost] // Agregar una venta
+        public ActionResult Post([FromBody] Venta venta) 
+        {
+            try
+            {
+                repositorio.agregarVenta(venta);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
     }
 }
