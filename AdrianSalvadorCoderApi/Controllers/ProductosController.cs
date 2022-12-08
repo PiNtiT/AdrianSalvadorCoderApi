@@ -36,80 +36,66 @@ namespace AdrianSalvadorCoderApi.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        // GET: ProductosController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProductosController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpPost] //  Agregar un producto
+        public ActionResult Post([FromBody] Producto producto) 
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                repositorio.crearProducto(producto);
+                return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return Problem(ex.Message);
             }
         }
 
-        // GET: ProductosController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: ProductosController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpDelete]
+        public ActionResult Delete([FromBody] long id) //  Borrar un producto 
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                bool seElimino = repositorio.eliminarProducto(id);
+                if (seElimino)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound(); 
+                }
+
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return Problem(ex.Message);
             }
         }
 
-        // GET: ProductosController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductosController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpPut]  
+        public ActionResult<Producto> Put(long id, [FromBody] Producto productoParaActualizar) //  Actualiza un producto 
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Producto? productoActualizado = repositorio.actualizarProducto(id, productoParaActualizar);
+                if (productoActualizado != null)
+                {
+                    return Ok(productoActualizado);
+                }
+                else
+                {
+                    return NotFound("El producto no fue encontrado");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return Problem(ex.Message);
             }
-        }*/
+
+        }
+
+
+       
     }
 }
